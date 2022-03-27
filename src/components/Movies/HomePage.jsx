@@ -4,7 +4,7 @@ import FilmsList from './FilmsList/FilmsList';
 
 import { getTrendingFilms } from './fetchFilms/fetchFilms';
 
- const MoviesMain = () => {
+const HomePage = ({ filmIdFunc }) => {
   const firstRender = useRef(true);
   const [films, setFilms] = useState([]);
 
@@ -21,11 +21,15 @@ import { getTrendingFilms } from './fetchFilms/fetchFilms';
     }
   }
 
+  // const filmIdFunc = (filmId) => {
+  //   console.log(filmId)
+  // }
+
   return (
     <>
-      <FilmsList films={films}/>
+      <FilmsList films={films} filmIdFunc={filmIdFunc} />
     </>
   );
 };
 
-export default MoviesMain;
+export default HomePage;

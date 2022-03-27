@@ -10,9 +10,9 @@
 
 .filmListItem {
   width: auto;
+  cursor: pointer;
   border-radius: 3px;
   box-shadow: 0px 0px 7px 1px rgba(34, 60, 80, 0.19);
-  cursor: pointer;
 }
 
 .filmListItemImg {
@@ -23,6 +23,6 @@
 }
 
 .filmTitle {
-    text-align: center;
-    margin: 13px 7px;
+  text-align: center;
+  margin: 13px 7px;
 }

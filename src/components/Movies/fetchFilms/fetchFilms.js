@@ -14,11 +14,17 @@ export async function getTrendingFilms() {
 }
 
 export async function searchFilms(searchWord) {
-  console.log('SearchFilms')
+  console.log('SearchFilms');
   const { data } = await instance.get('/search/movie', {
     params: {
       query: searchWord,
     },
   });
+  return data;
+}
+
+export async function getFullMovieInfo(filmId) {
+  console.log('GetFullInfo');
+  const { data } = await instance.get(`movie/${filmId}`);
   return data;
 }
