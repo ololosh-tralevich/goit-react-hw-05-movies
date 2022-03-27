@@ -8,19 +8,18 @@ const FilmsList = ({ films }) => {
           className={style.filmListItemImg}
           src={`https://image.tmdb.org/t/p/w500${film.poster_path}`}
           alt="Film Poster"
-          loading='lazy'
+          loading="lazy"
         ></img>
-        <h4 className={style.filmTitle}>{film.title}</h4>
+        {film.title ? (
+          <h4 className={style.filmTitle}>{film.title}</h4>
+        ) : (
+          <h4 className={style.filmTitle}>{film.original_name}</h4>
+        )}
       </li>
     );
   });
 
-  return (
-    <>
-    <h2>Trending today</h2>
-      <ul className={style.filmsList}>{partOfCode}</ul>
-    </>
-  );
+  return <ul className={style.filmsList}>{partOfCode}</ul>;
 };
 
 export default FilmsList;
