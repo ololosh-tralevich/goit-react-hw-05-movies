@@ -4,13 +4,12 @@ import FilmsList from './FilmsList/FilmsList';
 
 import { getTrendingFilms } from './fetchFilms/fetchFilms';
 
-const HomePage = ({ filmIdFunc }) => {
-  const firstRender = useRef(true);
+const MainPage = ({ filmIdFunc }) => {
   const [films, setFilms] = useState([]);
 
   useEffect(() => {
     takeFetchData();
-  }, [firstRender]);
+  }, []);
 
   async function takeFetchData() {
     try {
@@ -32,4 +31,4 @@ const HomePage = ({ filmIdFunc }) => {
   );
 };
 
-export default HomePage;
+export default MainPage;
