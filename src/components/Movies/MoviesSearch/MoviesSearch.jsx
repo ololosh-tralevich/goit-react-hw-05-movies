@@ -2,12 +2,12 @@ import { useState } from 'react';
 
 import { searchFilms } from '../fetchFilms/fetchFilms';
 
-import style from './MoviesPage.module.css';
+import style from './MoviesSearch.module.css';
 
 import searchIcon from '../img/searchIcon.svg';
 import FilmsList from '../FilmsList/FilmsList';
 
-const MoviesPage = ({ filmIdFunc }) => {
+const MoviesSearch = ({ filmIdFunc }) => {
   const [films, setFilms] = useState([]);
   const [searchWord, setSearchWord] = useState('');
 
@@ -55,4 +55,4 @@ const MoviesPage = ({ filmIdFunc }) => {
   );
 };
 
-export default MoviesPage;
+export default MoviesSearch;

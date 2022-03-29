@@ -1,8 +1,8 @@
-import MainPage from ".../components/Movies/MainPage";
+import MainPage from "../../components/Movies/MainPage";
 
-const HomePage = () => {
+const HomePage = ({filmIdFunc}) => {
     return(
-        <MainPage/>
+        <MainPage filmIdFunc={filmIdFunc}/>
     )
 }
 

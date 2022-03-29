@@ -1,20 +1,16 @@
 import { useEffect, useState, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate, NavLink } from 'react-router-dom';
 import { getFullMovieInfo } from '../fetchFilms/fetchFilms';
 
-import style from './movieDetailsPage.module.css';
+import style from './MovieDetails.module.css';
 
-const MovieDetailsPage = ({ filmId }) => {
-//   const firstRender = useRef(true);
+const linkClassName = ({ isActive }) =>
+  isActive ? style.activeAdditionalLink : style.additionalLink;
+
+const MovieDetails = ({ filmId }) => {
+  const navigate = useNavigate();
   const [film, setFilm] = useState({});
   const [filmGenres, setFilmGenres] = useState('');
-
-  //   useEffect(() => {
-  //     if (firstRender.current) {
-  //       takeFetchData();
-  //       firstRender.current = false;
-  //     }
-  //   }, []);
 
   useEffect(() => {
     takeFetchData();
@@ -40,12 +36,11 @@ const MovieDetailsPage = ({ filmId }) => {
     }
     setFilmGenres(genres.join(', '));
   };
-
   return (
     <div className={style.mainBlock}>
-      <Link to="/movies" className={style.goBackLink}>
+      <button onClick={() => navigate(-1)} className={style.goBackBtn}>
         Go Back
-      </Link>
+      </button>
       <div className={style.filmInfoMain}>
         <div className={style.filmPoster}>
           {film.poster_path ? (
@@ -79,9 +74,21 @@ const MovieDetailsPage = ({ filmId }) => {
       </div>
       <div className={style.additionalInfo}>
         <h3>Additional Info:</h3>
+        <ul className={style.additionalList}>
+          <NavLink to={`movies/${filmId}/cast`} className={linkClassName}>
+            <li>
+              <h4>Cast</h4>
+            </li>
+          </NavLink>
+          <NavLink to={`movies/${filmId}/reviews`} className={linkClassName}>
+            <li>
+              <h4>Reviews</h4>
+            </li>
+          </NavLink>
+        </ul>
       </div>
     </div>
   );
 };
 
-export default MovieDetailsPage;
+export default MovieDetails;
