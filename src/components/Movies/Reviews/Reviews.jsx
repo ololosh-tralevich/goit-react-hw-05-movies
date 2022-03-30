@@ -11,6 +11,7 @@ const Reviews = ({ filmId }) => {
 
   useEffect(() => {
     takeFetchData();
+    // eslint-disable-next-line
   }, []);
 
   async function takeFetchData() {
@@ -46,4 +47,4 @@ export default Reviews;
 
 Reviews.propTypes = {
   filmId: PropTypes.number.isRequired,
-}
+};
