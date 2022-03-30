@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, memo } from 'react';
 
 import { searchFilms } from '../fetchFilms/fetchFilms';
 
@@ -57,7 +57,7 @@ const MoviesSearch = ({ filmIdFunc }) => {
   );
 };
 
-export default MoviesSearch;
+export default memo(MoviesSearch);
 
 MoviesSearch.propTypes = {
   filmIdFunc: PropTypes.func.isRequired,
