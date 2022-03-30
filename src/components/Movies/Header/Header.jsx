@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import style from './header.module.css';
 
 const linkClassName = ({ isActive }) =>
-  isActive ? style.activeHeaderLink : style.headerLink;
+isActive ? style.activeHeaderLink : style.headerLink;
 
 const Header = () => {
   return (

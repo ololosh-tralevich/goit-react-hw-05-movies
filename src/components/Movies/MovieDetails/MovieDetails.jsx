@@ -1,23 +1,27 @@
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate, NavLink } from 'react-router-dom';
 import { getFullMovieInfo } from '../fetchFilms/fetchFilms';
+
+import PropTypes from 'prop-types';
 
 import style from './MovieDetails.module.css';
 
 const linkClassName = ({ isActive }) =>
   isActive ? style.activeAdditionalLink : style.additionalLink;
 
-const MovieDetails = ({ filmId}) => {
+const MovieDetails = ({ filmId }) => {
   const navigate = useNavigate();
   const [film, setFilm] = useState({});
   const [filmGenres, setFilmGenres] = useState('');
 
   useEffect(() => {
     takeFetchData();
+    //eslint-disable-next-line
   }, [filmId]);
 
   useEffect(() => {
     film.genres && parseFilmGenres();
+    //eslint-disable-next-line
   }, [film]);
 
   async function takeFetchData() {
@@ -79,7 +83,7 @@ const MovieDetails = ({ filmId}) => {
               <h4>Cast</h4>
             </li>
           </NavLink>
-        <h2 className={style.additionalInfoTitle}>Additional Info</h2>
+          <h2 className={style.additionalInfoTitle}>Additional Info</h2>
           <NavLink to={`/movies/${filmId}/reviews`} className={linkClassName}>
             <li>
               <h4>Reviews</h4>
@@ -92,3 +96,7 @@ const MovieDetails = ({ filmId}) => {
 };
 
 export default MovieDetails;
+
+MovieDetails.propTypes = {
+  filmId: PropTypes.number.isRequired,
+}

@@ -2,6 +2,8 @@ import { useState } from 'react';
 
 import { searchFilms } from '../fetchFilms/fetchFilms';
 
+import PropTypes from 'prop-types';
+
 import style from './MoviesSearch.module.css';
 
 import searchIcon from '../img/searchIcon.svg';
@@ -56,3 +58,7 @@ const MoviesSearch = ({ filmIdFunc }) => {
 };
 
 export default MoviesSearch;
+
+MoviesSearch.propTypes = {
+  filmIdFunc: PropTypes.func.isRequired,
+};

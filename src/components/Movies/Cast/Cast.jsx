@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import { getMovieCast } from '../fetchFilms/fetchFilms';
 
+import PropTypes from 'prop-types'
+
 import style from './cast.module.css';
 
 const Cast = ({ filmId }) => {
@@ -8,6 +10,7 @@ const Cast = ({ filmId }) => {
 
   useEffect(() => {
     takeFetchData();
+        //eslint-disable-next-line
   }, []);
 
   async function takeFetchData() {
@@ -55,3 +58,7 @@ const Cast = ({ filmId }) => {
 };
 
 export default Cast;
+
+Cast.propTypes = {
+  filmId: PropTypes.number.isRequired
+}

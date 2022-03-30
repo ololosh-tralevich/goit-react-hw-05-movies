@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 import MoviesSearch from '../../components/Movies/MoviesSearch/MoviesSearch';
 
 const MoviesPage = ({ filmIdFunc }) => {
@@ -5,3 +7,7 @@ const MoviesPage = ({ filmIdFunc }) => {
 };
 
 export default MoviesPage;
+
+MoviesPage.propTypes = {
+  filmIdFunc: PropTypes.func.isRequired
+}

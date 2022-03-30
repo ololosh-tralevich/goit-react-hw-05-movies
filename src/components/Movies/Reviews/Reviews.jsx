@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 
+import PropTypes from 'prop-types';
+
 import { getMovieReview } from '../fetchFilms/fetchFilms';
 
 import style from './reviews.module.css';
@@ -41,3 +43,7 @@ const Reviews = ({ filmId }) => {
 };
 
 export default Reviews;
+
+Reviews.propTypes = {
+  filmId: PropTypes.number.isRequired,
+}

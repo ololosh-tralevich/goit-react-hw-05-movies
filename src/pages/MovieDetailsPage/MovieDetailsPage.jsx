@@ -1,4 +1,7 @@
 import { Outlet } from 'react-router-dom';
+
+import PropTypes from 'prop-types';
+
 import MovieDetails from '../../components/Movies/MovieDetails/MovieDetails';
 
 const MovieDetailsPage = ({ filmId }) => {
@@ -11,3 +14,7 @@ const MovieDetailsPage = ({ filmId }) => {
 };
 
 export default MovieDetailsPage;
+
+MovieDetailsPage.propTypes = {
+  filmId: PropTypes.number.isRequired
+};

@@ -8,13 +8,13 @@ const instance = axios.create({
 });
 
 export async function getTrendingFilms() {
-  console.log('GetTrendingFilms');
+  // console.log('GetTrendingFilms');
   const { data } = await instance.get('/trending/all/day');
   return data;
 }
 
 export async function searchFilms(searchWord) {
-  console.log('SearchFilms');
+  // console.log('SearchFilms');
   const { data } = await instance.get('/search/movie', {
     params: {
       query: searchWord,
@@ -24,19 +24,19 @@ export async function searchFilms(searchWord) {
 }
 
 export async function getFullMovieInfo(filmId) {
-  console.log('GetFullInfo');
+  // console.log('GetFullInfo');
   const { data } = await instance.get(`movie/${filmId}`);
   return data;
 }
 
 export async function getMovieCast(filmId) {
-  console.log('getMovieCast');
+  // console.log('getMovieCast');
   const { data } = await instance.get(`movie/${filmId}/credits`);
   return data;
 }
 
 export async function getMovieReview(filmId) {
-  console.log('getMovieReview');
-  const {data} = await instance.get(`movie/${filmId}/reviews`);
+  // console.log('getMovieReview');
+  const { data } = await instance.get(`movie/${filmId}/reviews`);
   return data;
 }

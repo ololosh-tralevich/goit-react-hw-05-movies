@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 import MainPage from "../../components/Movies/MainPage";
 
 const HomePage = ({filmIdFunc}) => {
@@ -6,4 +8,8 @@ const HomePage = ({filmIdFunc}) => {
     )
 }
 
-export default HomePage ;
+export default HomePage;
+
+HomePage.propTypes = {
+    filmIdFunc: PropTypes.func.isRequired
+}

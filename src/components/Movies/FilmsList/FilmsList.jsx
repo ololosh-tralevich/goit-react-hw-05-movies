@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom';
 
+import PropTypes from 'prop-types';
+
 import style from './filmsList.module.css';
 
 const FilmsList = ({ films, filmIdFunc }) => {
@@ -41,3 +43,15 @@ const FilmsList = ({ films, filmIdFunc }) => {
 };
 
 export default FilmsList;
+
+FilmsList.propTypes = {
+  filmIdFunc: PropTypes.func.isRequired,
+  films: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      poster_path: PropTypes.string,
+      title: PropTypes.string,
+      original_name: PropTypes.string,
+    }).isRequired
+  ).isRequired,
+};
