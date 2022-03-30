@@ -28,3 +28,15 @@ export async function getFullMovieInfo(filmId) {
   const { data } = await instance.get(`movie/${filmId}`);
   return data;
 }
+
+export async function getMovieCast(filmId) {
+  console.log('getMovieCast');
+  const { data } = await instance.get(`movie/${filmId}/credits`);
+  return data;
+}
+
+export async function getMovieReview(filmId) {
+  console.log('getMovieReview');
+  const {data} = await instance.get(`movie/${filmId}/reviews`);
+  return data;
+}

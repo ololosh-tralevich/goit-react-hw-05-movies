@@ -7,7 +7,7 @@ import style from './MovieDetails.module.css';
 const linkClassName = ({ isActive }) =>
   isActive ? style.activeAdditionalLink : style.additionalLink;
 
-const MovieDetails = ({ filmId }) => {
+const MovieDetails = ({ filmId}) => {
   const navigate = useNavigate();
   const [film, setFilm] = useState({});
   const [filmGenres, setFilmGenres] = useState('');
@@ -73,14 +73,14 @@ const MovieDetails = ({ filmId }) => {
         </div>
       </div>
       <div className={style.additionalInfo}>
-        <h3>Additional Info:</h3>
         <ul className={style.additionalList}>
-          <NavLink to={`movies/${filmId}/cast`} className={linkClassName}>
+          <NavLink to={`/movies/${filmId}/cast`} className={linkClassName}>
             <li>
               <h4>Cast</h4>
             </li>
           </NavLink>
-          <NavLink to={`movies/${filmId}/reviews`} className={linkClassName}>
+        <h2 className={style.additionalInfoTitle}>Additional Info</h2>
+          <NavLink to={`/movies/${filmId}/reviews`} className={linkClassName}>
             <li>
               <h4>Reviews</h4>
             </li>

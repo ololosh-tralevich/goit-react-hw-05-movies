@@ -34,11 +34,11 @@ export const App = () => {
             element={<MoviesPage filmIdFunc={filmIdFunc} />}
           />
           <Route
-            path="movies/:movieId"
+            path="movies/:movieId/"
             element={<MovieDetailsPage filmId={filmId} />}
           >
-            <Route path="movies/:movieId/cast" element={<Cast />} />
-            <Route path="movies/:movieId/reviews" element={<Reviews />} />
+            <Route path="cast" element={<Cast  filmId={filmId}/>} />
+            <Route path="reviews" element={<Reviews  filmId={filmId}/>} />
           </Route>
         </Route>
       </Routes>

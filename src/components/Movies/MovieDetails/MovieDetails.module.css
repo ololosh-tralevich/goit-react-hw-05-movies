@@ -10,6 +10,7 @@
 
 .filmInfoMain {
   display: flex;
+  margin-bottom: 15px;
 }
 
 .filmImg {
@@ -53,12 +54,19 @@
   width: 100%;
 }
 
+.additionalInfoTitle {
+  margin: 0;
+}
+
 .additionalList {
   display: flex;
   justify-content: space-around;
+  align-items: center
 }
 
 .additionalLink {
+  height: min-content;
+
   display: flex;
   align-items: center;
   background-color: #fff;
