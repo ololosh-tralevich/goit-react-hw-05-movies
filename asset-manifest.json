@@ -1,14 +1,26 @@
 {
   "files": {
-    "main.css": "/react-homework-template/static/css/main.4fb534c3.css",
-    "main.js": "/react-homework-template/static/js/main.debdb750.js",
-    "index.html": "/react-homework-template/index.html",
-    "static/media/searchIcon.svg": "/react-homework-template/static/media/searchIcon.7776d94b12abda58f11c268edb7c6a5c.svg",
-    "main.4fb534c3.css.map": "/react-homework-template/static/css/main.4fb534c3.css.map",
-    "main.debdb750.js.map": "/react-homework-template/static/js/main.debdb750.js.map"
+    "main.css": "/static/css/main.a130293f.css",
+    "main.js": "/static/js/main.03c11119.js",
+    "static/css/840.27fc56c4.chunk.css": "/static/css/840.27fc56c4.chunk.css",
+    "static/js/840.cb98da29.chunk.js": "/static/js/840.cb98da29.chunk.js",
+    "static/css/859.542ea6f4.chunk.css": "/static/css/859.542ea6f4.chunk.css",
+    "static/js/859.3d05fa30.chunk.js": "/static/js/859.3d05fa30.chunk.js",
+    "static/css/817.de0cd5ae.chunk.css": "/static/css/817.de0cd5ae.chunk.css",
+    "static/js/817.849bbafd.chunk.js": "/static/js/817.849bbafd.chunk.js",
+    "index.html": "/index.html",
+    "static/media/searchIcon.svg": "/static/media/searchIcon.7776d94b12abda58f11c268edb7c6a5c.svg",
+    "main.a130293f.css.map": "/static/css/main.a130293f.css.map",
+    "main.03c11119.js.map": "/static/js/main.03c11119.js.map",
+    "840.27fc56c4.chunk.css.map": "/static/css/840.27fc56c4.chunk.css.map",
+    "840.cb98da29.chunk.js.map": "/static/js/840.cb98da29.chunk.js.map",
+    "859.542ea6f4.chunk.css.map": "/static/css/859.542ea6f4.chunk.css.map",
+    "859.3d05fa30.chunk.js.map": "/static/js/859.3d05fa30.chunk.js.map",
+    "817.de0cd5ae.chunk.css.map": "/static/css/817.de0cd5ae.chunk.css.map",
+    "817.849bbafd.chunk.js.map": "/static/js/817.849bbafd.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.4fb534c3.css",
-    "static/js/main.debdb750.js"
+    "static/css/main.a130293f.css",
+    "static/js/main.03c11119.js"
   ]
 }
