@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 
-import MoviesSearch from '../../components/Movies/MoviesSearch/MoviesSearch';
+import MoviesSearch from '../../components/MoviesSearch/MoviesSearch';
 
 const MoviesPage = ({ filmIdFunc }) => {
   return <MoviesSearch filmIdFunc={filmIdFunc} />;

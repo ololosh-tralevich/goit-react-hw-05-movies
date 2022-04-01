@@ -1,10 +1,10 @@
 import PropTypes from 'prop-types';
 
-import MainPage from "../../components/Movies/MainPage";
+import TrendingMovies from "../../components/TrendingMovies/TrendingMovies";
 
 const HomePage = ({filmIdFunc}) => {
     return(
-        <MainPage filmIdFunc={filmIdFunc}/>
+        <TrendingMovies filmIdFunc={filmIdFunc}/>
     )
 }
 

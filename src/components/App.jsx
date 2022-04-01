@@ -3,8 +3,8 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 
 import LayoutPage from '../pages/LayoutPage/LayoutPage';
 
-import Cast from './Movies/Cast';
-import Reviews from './Movies/Reviews';
+import Cast from './Cast';
+import Reviews from './Reviews';
 
 const HomePage = lazy(() => import('../pages/HomePage'));
 const MoviesPage = lazy(() => import('../pages/MoviesPage'));

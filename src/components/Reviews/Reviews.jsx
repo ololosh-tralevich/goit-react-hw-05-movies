@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 
 import PropTypes from 'prop-types';
 
-import { getMovieReview } from '../fetchFilms/fetchFilms';
+import { getMovieReview } from '../../shared/services/fetchFilms';
 
 import style from './reviews.module.css';
 

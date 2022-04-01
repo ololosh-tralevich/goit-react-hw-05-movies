@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, NavLink } from 'react-router-dom';
-import { getFullMovieInfo } from '../fetchFilms/fetchFilms';
+import { getFullMovieInfo } from '../../shared/services/fetchFilms';
 
 import PropTypes from 'prop-types';
 

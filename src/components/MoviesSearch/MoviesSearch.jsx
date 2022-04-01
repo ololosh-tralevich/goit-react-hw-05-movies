@@ -1,6 +1,6 @@
 import { useState, memo } from 'react';
 
-import { searchFilms } from '../fetchFilms/fetchFilms';
+import { searchFilms } from '../../shared/services/fetchFilms';
 
 import PropTypes from 'prop-types';
 

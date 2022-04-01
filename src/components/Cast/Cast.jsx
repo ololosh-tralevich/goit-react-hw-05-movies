@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { getMovieCast } from '../fetchFilms/fetchFilms';
+import { getMovieCast } from '../../shared/services/fetchFilms';
 
 import PropTypes from 'prop-types'
 

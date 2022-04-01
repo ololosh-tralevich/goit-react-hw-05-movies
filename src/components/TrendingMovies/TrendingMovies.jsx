@@ -2,11 +2,11 @@ import { useEffect, useState } from 'react';
 
 import PropTypes from 'prop-types';
 
-import FilmsList from './FilmsList/FilmsList';
+import FilmsList from '../FilmsList/FilmsList';
 
-import { getTrendingFilms } from './fetchFilms/fetchFilms';
+import { getTrendingFilms } from '../../shared/services/fetchFilms';
 
-const MainPage = ({ filmIdFunc }) => {
+const TrendingMovies = ({ filmIdFunc }) => {
   const [films, setFilms] = useState([]);
 
   useEffect(() => {
@@ -34,8 +34,8 @@ const MainPage = ({ filmIdFunc }) => {
   );
 };
 
-export default MainPage;
+export default TrendingMovies;
 
-MainPage.propTypes = {
+TrendingMovies.propTypes = {
   filmIdFunc: PropTypes.func.isRequired,
 }
