@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useNavigate, NavLink } from 'react-router-dom';
+import { useNavigate, NavLink, useLocation } from 'react-router-dom';
 import { getFullMovieInfo } from '../../shared/services/fetchFilms';
 
 import PropTypes from 'prop-types';
@@ -10,6 +10,9 @@ const linkClassName = ({ isActive }) =>
   isActive ? style.activeAdditionalLink : style.additionalLink;
 
 const MovieDetails = ({ filmId }) => {
+  const location = useLocation();
+  const from = location.state?.from || "/";
+
   const navigate = useNavigate();
   const [film, setFilm] = useState({});
   const [filmGenres, setFilmGenres] = useState('');
@@ -42,7 +45,7 @@ const MovieDetails = ({ filmId }) => {
   };
   return (
     <div className={style.mainBlock}>
-      <button onClick={() => navigate(-1)} className={style.goBackBtn}>
+      <button onClick={() => navigate(from)} className={style.goBackBtn}>
         Go Back
       </button>
       <div className={style.filmInfoMain}>
@@ -78,13 +81,13 @@ const MovieDetails = ({ filmId }) => {
       </div>
       <div className={style.additionalInfo}>
         <ul className={style.additionalList}>
-          <NavLink to={`/movies/${filmId}/cast`} className={linkClassName}>
+          <NavLink to={`/movies/${filmId}/cast`} className={linkClassName} state={{from: from}}>
             <li>
               <h4>Cast</h4>
             </li>
           </NavLink>
           <h2 className={style.additionalInfoTitle}>Additional Info</h2>
-          <NavLink to={`/movies/${filmId}/reviews`} className={linkClassName}>
+          <NavLink to={`/movies/${filmId}/reviews`} className={linkClassName} state={{from: from}}>
             <li>
               <h4>Reviews</h4>
             </li>

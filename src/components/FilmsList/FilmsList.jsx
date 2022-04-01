@@ -1,10 +1,11 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 import PropTypes from 'prop-types';
 
 import style from './filmsList.module.css';
 
 const FilmsList = ({ films, filmIdFunc }) => {
+  const from = useLocation();
   const partOfCode = films.map(film => {
     return (
       <li
@@ -12,7 +13,7 @@ const FilmsList = ({ films, filmIdFunc }) => {
         key={film.id}
         onClick={() => filmIdFunc(film.id)}
       >
-        <Link to={`/movies/${film.id}`}>
+        <Link to={`/movies/${film.id}`} state={{ from: from }}>
           {film.poster_path ? (
             <img
               className={style.filmListItemImg}
