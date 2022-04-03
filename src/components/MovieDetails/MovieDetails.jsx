@@ -11,11 +11,19 @@ const linkClassName = ({ isActive }) =>
 
 const MovieDetails = ({ filmId }) => {
   const location = useLocation();
-  const from = location.state?.from || "/";
+  const from = location.state?.from || '/';
 
   const navigate = useNavigate();
-  const [film, setFilm] = useState({});
-  const [filmGenres, setFilmGenres] = useState('');
+  const [parsedGenres, setParsedGenres] = useState('');
+  const [filmData, setFilmData] = useState({
+    genres: [],
+    poster_path: '',
+    vote_average: 0,
+    overview: '',
+    original_name: '',
+    loading: false,
+    error: false,
+  });
 
   useEffect(() => {
     takeFetchData();
@@ -23,37 +31,60 @@ const MovieDetails = ({ filmId }) => {
   }, [filmId]);
 
   useEffect(() => {
-    film.genres && parseFilmGenres();
+    filmData.genres && parseFilmGenres();
     //eslint-disable-next-line
-  }, [film]);
+  }, [filmData]);
 
   async function takeFetchData() {
+    setFilmData(prevState => {
+      return {
+        ...prevState,
+        loading: true,
+      };
+    });
     try {
       const data = await getFullMovieInfo(filmId);
-      setFilm(data);
+      setFilmData({
+        genres: data.genres,
+        poster_path: data.poster_path,
+        vote_average: data.vote_average,
+        overview: data.overview,
+        original_name: data.original_name,
+        loading: false,
+        error: false,
+      });
     } catch (err) {
       console.log('Error:', err);
+      setFilmData(prevState => {
+        return {
+          ...prevState,
+          error: true,
+          loading: false,
+        };
+      });
     }
   }
 
   const parseFilmGenres = () => {
     const genres = [];
-    for (const genre of film.genres) {
+    for (const genre of filmData.genres) {
       genres.push(genre.name);
     }
-    setFilmGenres(genres.join(', '));
+    setParsedGenres(genres.join(', '));
   };
   return (
     <div className={style.mainBlock}>
+      {filmData.loading && <h2>Loading...</h2>}
+      {filmData.error && <h2>Something went wrong...</h2>}
       <button onClick={() => navigate(from)} className={style.goBackBtn}>
         Go Back
       </button>
       <div className={style.filmInfoMain}>
         <div className={style.filmPoster}>
-          {film.poster_path ? (
+          {filmData.poster_path ? (
             <img
               className={style.filmImg}
-              src={`https://image.tmdb.org/t/p/w500${film.poster_path}`}
+              src={`https://image.tmdb.org/t/p/w500${filmData.poster_path}`}
               alt="Film Poster"
               loading="lazy"
             ></img>
@@ -67,27 +98,35 @@ const MovieDetails = ({ filmId }) => {
           )}
         </div>
         <div className={style.filmInfo}>
-          {film.title ? (
-            <h2 className={style.filmTitle}>{film.title}</h2>
+          {filmData.title ? (
+            <h2 className={style.filmTitle}>{filmData.title}</h2>
           ) : (
-            <h2 className={style.filmTitle}>{film.original_name}</h2>
+            <h2 className={style.filmTitle}>{filmData.original_name}</h2>
           )}
-          <h3>User Score: {film.vote_average}</h3>
+          <h3>User Score: {filmData.vote_average}</h3>
           <h3>Overview:</h3>
-          <p>{film.overview}</p>
+          <p>{filmData.overview}</p>
           <h3>Genres:</h3>
-          {filmGenres || <h4>{filmGenres}</h4>}
+          {parsedGenres || <h4>{parsedGenres}</h4>}
         </div>
       </div>
       <div className={style.additionalInfo}>
         <ul className={style.additionalList}>
-          <NavLink to={`/movies/${filmId}/cast`} className={linkClassName} state={{from: from}}>
+          <NavLink
+            to={`/movies/${filmId}/cast`}
+            className={linkClassName}
+            state={{ from: from }}
+          >
             <li>
               <h4>Cast</h4>
             </li>
           </NavLink>
           <h2 className={style.additionalInfoTitle}>Additional Info</h2>
-          <NavLink to={`/movies/${filmId}/reviews`} className={linkClassName} state={{from: from}}>
+          <NavLink
+            to={`/movies/${filmId}/reviews`}
+            className={linkClassName}
+            state={{ from: from }}
+          >
             <li>
               <h4>Reviews</h4>
             </li>
@@ -102,4 +141,4 @@ export default MovieDetails;
 
 MovieDetails.propTypes = {
   filmId: PropTypes.number.isRequired,
-}
+};
