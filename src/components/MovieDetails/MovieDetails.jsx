@@ -73,67 +73,72 @@ const MovieDetails = ({ filmId }) => {
     setParsedGenres(genres.join(', '));
   };
   return (
-    <div className={style.mainBlock}>
+    <>
       {filmData.loading && <h2>Loading...</h2>}
-      {filmData.error && <h2>Something went wrong...</h2>}
-      <button onClick={() => navigate(from)} className={style.goBackBtn}>
-        Go Back
-      </button>
-      <div className={style.filmInfoMain}>
-        <div className={style.filmPoster}>
-          {filmData.poster_path ? (
-            <img
-              className={style.filmImg}
-              src={`https://image.tmdb.org/t/p/w500${filmData.poster_path}`}
-              alt="Film Poster"
-              loading="lazy"
-            ></img>
-          ) : (
-            <img
-              className={style.filmImg}
-              src="https://media.istockphoto.com/vectors/no-image-available-icon-vector-id1216251206?k=20&m=1216251206&s=170667a&w=0&h=A72dFkHkDdSfmT6iWl6eMN9t_JZmqGeMoAycP-LMAw4="
-              alt="Film Poster"
-              loading="lazy"
-            ></img>
-          )}
+      {filmData.error ? (
+        <h2>Something went wrong...</h2>
+      ) : (
+        <div className={style.mainBlock}>
+          <button onClick={() => navigate(from)} className={style.goBackBtn}>
+            Go Back
+          </button>
+          <div className={style.filmInfoMain}>
+            <div className={style.filmPoster}>
+              {filmData.poster_path ? (
+                <img
+                  className={style.filmImg}
+                  src={`https://image.tmdb.org/t/p/w500${filmData.poster_path}`}
+                  alt="Film Poster"
+                  loading="lazy"
+                ></img>
+              ) : (
+                <img
+                  className={style.filmImg}
+                  src="https://media.istockphoto.com/vectors/no-image-available-icon-vector-id1216251206?k=20&m=1216251206&s=170667a&w=0&h=A72dFkHkDdSfmT6iWl6eMN9t_JZmqGeMoAycP-LMAw4="
+                  alt="Film Poster"
+                  loading="lazy"
+                ></img>
+              )}
+            </div>
+            <div className={style.filmInfo}>
+              {filmData.title ? (
+                <h2 className={style.filmTitle}>{filmData.title}</h2>
+              ) : (
+                <h2 className={style.filmTitle}>{filmData.original_name}</h2>
+              )}
+              <h3>User Score: {filmData.vote_average}</h3>
+              <h3>Overview:</h3>
+              <p>{filmData.overview}</p>
+              <h3>Genres:</h3>
+              {parsedGenres || <h4>{parsedGenres}</h4>}
+            </div>
+          </div>
+          <div className={style.additionalInfo}>
+            <ul className={style.additionalList}>
+              <NavLink
+                to={`/movies/${filmId}/cast`}
+                className={linkClassName}
+                state={{ from: from }}
+              >
+                <li>
+                  <h4>Cast</h4>
+                </li>
+              </NavLink>
+              <h2 className={style.additionalInfoTitle}>Additional Info</h2>
+              <NavLink
+                to={`/movies/${filmId}/reviews`}
+                className={linkClassName}
+                state={{ from: from }}
+              >
+                <li>
+                  <h4>Reviews</h4>
+                </li>
+              </NavLink>
+            </ul>
+          </div>
         </div>
-        <div className={style.filmInfo}>
-          {filmData.title ? (
-            <h2 className={style.filmTitle}>{filmData.title}</h2>
-          ) : (
-            <h2 className={style.filmTitle}>{filmData.original_name}</h2>
-          )}
-          <h3>User Score: {filmData.vote_average}</h3>
-          <h3>Overview:</h3>
-          <p>{filmData.overview}</p>
-          <h3>Genres:</h3>
-          {parsedGenres || <h4>{parsedGenres}</h4>}
-        </div>
-      </div>
-      <div className={style.additionalInfo}>
-        <ul className={style.additionalList}>
-          <NavLink
-            to={`/movies/${filmId}/cast`}
-            className={linkClassName}
-            state={{ from: from }}
-          >
-            <li>
-              <h4>Cast</h4>
-            </li>
-          </NavLink>
-          <h2 className={style.additionalInfoTitle}>Additional Info</h2>
-          <NavLink
-            to={`/movies/${filmId}/reviews`}
-            className={linkClassName}
-            state={{ from: from }}
-          >
-            <li>
-              <h4>Reviews</h4>
-            </li>
-          </NavLink>
-        </ul>
-      </div>
-    </div>
+      )}
+    </>
   );
 };
 

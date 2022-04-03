@@ -7,7 +7,11 @@ import { getMovieReview } from '../../shared/services/fetchFilms';
 import style from './reviews.module.css';
 
 const Reviews = ({ filmId }) => {
-  const [filmReviews, setFilmReviews] = useState([]);
+  const [filmData, setFilmData] = useState({
+    reviews: [],
+    loading: false,
+    error: false,
+  });
 
   useEffect(() => {
     takeFetchData();
@@ -15,15 +19,21 @@ const Reviews = ({ filmId }) => {
   }, []);
 
   async function takeFetchData() {
+    setFilmData(prevState => {
+      return { ...prevState, loading: true };
+    });
     try {
       const data = await getMovieReview(filmId);
-      setFilmReviews(data.results);
+      setFilmData({ reviews: data.results, loading: false, error: false });
     } catch (err) {
-      console.log('Error: ', err);
+      console.log(err);
+      setFilmData(prevState => {
+        return { ...prevState, loading: false, error: true };
+      });
     }
   }
 
-  const partOfCode = filmReviews.map(review => {
+  const partOfCode = filmData.reviews.map(review => {
     return (
       <li className={style.reviewItem} key={review.id}>
         <h2 className={style.reviewTitle}>{`Author: ${review.author}`}</h2>
@@ -34,7 +44,9 @@ const Reviews = ({ filmId }) => {
 
   return (
     <div className={style.filmReviewsBlock}>
-      {filmReviews.length ? (
+      {filmData.loading && <h2>Searching...</h2>}
+      {filmData.error && <h2>Something went wrong...</h2>}
+      {filmData.reviews.length ? (
         <ul className={style.reviewList}>{partOfCode}</ul>
       ) : (
         <h1 style={{ textAlign: 'center' }}>No info about film review</h1>

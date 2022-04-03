@@ -1,27 +1,37 @@
 import { useEffect, useState } from 'react';
 import { getMovieCast } from '../../shared/services/fetchFilms';
 
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
 
 import style from './cast.module.css';
 
 const Cast = ({ filmId }) => {
-  const [filmCast, setFilmCast] = useState([]);
+  const [filmData, setFilmData] = useState({
+    cast: [],
+    loading: false,
+    error: false,
+  });
 
   useEffect(() => {
     takeFetchData();
-        //eslint-disable-next-line
+    //eslint-disable-next-line
   }, []);
 
   async function takeFetchData() {
+    setFilmData(prevState => {
+      return { ...prevState, loading: true };
+    });
     try {
       const data = await getMovieCast(filmId);
-      setFilmCast(data.cast);
+      setFilmData({ cast: data.cast, loading: false, error: false });
     } catch (err) {
-      console.log('Error: ', err);
+      console.log(err);
+      setFilmData(prevState => {
+        return { ...prevState, error: true, loading: false };
+      });
     }
   }
-  const partOfCode = filmCast.map(actor => {
+  const partOfCode = filmData.cast.map(actor => {
     return (
       <li className={style.filmCastItem} key={actor.id}>
         {actor.profile_path ? (
@@ -48,7 +58,9 @@ const Cast = ({ filmId }) => {
   });
   return (
     <div className={style.filmCastBlock}>
-      {filmCast.length ? (
+      {filmData.loading && <h2>Searching...</h2>}
+      {filmData.error && <h2>Something went wrong...</h2>}
+      {filmData.cast.length ? (
         <ul className={style.filmCastList}>{partOfCode}</ul>
       ) : (
         <h1 style={{ textAlign: 'center' }}>No info about film cast</h1>
@@ -60,5 +72,5 @@ const Cast = ({ filmId }) => {
 export default Cast;
 
 Cast.propTypes = {
-  filmId: PropTypes.number.isRequired
-}
+  filmId: PropTypes.number.isRequired,
+};
