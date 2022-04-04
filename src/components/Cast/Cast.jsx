@@ -1,11 +1,13 @@
 import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { getMovieCast } from '../../shared/services/fetchFilms';
-
-import PropTypes from 'prop-types';
 
 import style from './cast.module.css';
 
-const Cast = ({ filmId }) => {
+const Cast = () => {
+  const { movieId } = useParams();
+
+
   const [filmData, setFilmData] = useState({
     cast: [],
     loading: false,
@@ -22,7 +24,7 @@ const Cast = ({ filmId }) => {
       return { ...prevState, loading: true };
     });
     try {
-      const data = await getMovieCast(filmId);
+      const data = await getMovieCast(movieId );
       setFilmData({ cast: data.cast, loading: false, error: false });
     } catch (err) {
       console.log(err);
@@ -71,6 +73,3 @@ const Cast = ({ filmId }) => {
 
 export default Cast;
 
-Cast.propTypes = {
-  filmId: PropTypes.number.isRequired,
-};

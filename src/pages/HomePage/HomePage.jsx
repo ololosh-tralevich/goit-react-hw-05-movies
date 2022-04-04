@@ -1,15 +1,10 @@
-import PropTypes from 'prop-types';
 
 import TrendingMovies from "../../components/TrendingMovies/TrendingMovies";
 
-const HomePage = ({filmIdFunc}) => {
+const HomePage = () => {
     return(
-        <TrendingMovies filmIdFunc={filmIdFunc}/>
+        <TrendingMovies/>
     )
 }
 
 export default HomePage;
-
-HomePage.propTypes = {
-    filmIdFunc: PropTypes.func.isRequired
-}

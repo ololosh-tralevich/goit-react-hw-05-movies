@@ -1,15 +1,14 @@
 import { useState, memo, useCallback } from 'react';
+import { useSearchParams } from 'react-router-dom';
 
 import { searchFilms } from '../../shared/services/fetchFilms';
-
-import PropTypes from 'prop-types';
 
 import style from './MoviesSearch.module.css';
 
 import searchIcon from '../img/searchIcon.svg';
 import FilmsList from '../FilmsList/FilmsList';
 
-const MoviesSearch = ({ filmIdFunc }) => {
+const MoviesSearch = () => {
   const [filmsData, setFilmsData] = useState({
     films: [],
     err: null,
@@ -83,13 +82,9 @@ const MoviesSearch = ({ filmIdFunc }) => {
       {filmsData.loading && <h2>Searching...</h2>}
       {filmsData.err && <h2>Something went wrong...</h2>}
       {filmsData.notFoundMessage && <h2>{filmsData.notFoundMessage}</h2>}
-      {Boolean(filmsData.films.length) &&  <FilmsList films={filmsData.films} filmIdFunc={filmIdFunc} />}
+      {Boolean(filmsData.films.length) &&  <FilmsList films={filmsData.films} />}
     </>
   );
 };
 
 export default memo(MoviesSearch);
-
-MoviesSearch.propTypes = {
-  filmIdFunc: PropTypes.func.isRequired,
-};

@@ -4,14 +4,13 @@ import PropTypes from 'prop-types';
 
 import style from './filmsList.module.css';
 
-const FilmsList = ({ films, filmIdFunc }) => {
+const FilmsList = ({ films }) => {
   const from = useLocation();
   const partOfCode = films.map(film => {
     return (
       <li
         className={style.filmListItem}
         key={film.id}
-        onClick={() => filmIdFunc(film.id)}
       >
         <Link to={`/movies/${film.id}`} state={{ from: from }}>
           {film.poster_path ? (
@@ -46,7 +45,6 @@ const FilmsList = ({ films, filmIdFunc }) => {
 export default FilmsList;
 
 FilmsList.propTypes = {
-  filmIdFunc: PropTypes.func.isRequired,
   films: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number.isRequired,

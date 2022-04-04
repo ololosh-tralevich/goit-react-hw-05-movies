@@ -1,19 +1,21 @@
 import { useEffect, useState } from 'react';
-import { useNavigate, NavLink, useLocation } from 'react-router-dom';
+import { useNavigate, NavLink, useLocation, useParams } from 'react-router-dom';
 import { getFullMovieInfo } from '../../shared/services/fetchFilms';
-
-import PropTypes from 'prop-types';
 
 import style from './MovieDetails.module.css';
 
 const linkClassName = ({ isActive }) =>
   isActive ? style.activeAdditionalLink : style.additionalLink;
 
-const MovieDetails = ({ filmId }) => {
+const MovieDetails = () => {
   const location = useLocation();
   const from = location.state?.from || '/';
 
   const navigate = useNavigate();
+
+  const { movieId } = useParams();
+
+
   const [parsedGenres, setParsedGenres] = useState('');
   const [filmData, setFilmData] = useState({
     genres: [],
@@ -28,7 +30,7 @@ const MovieDetails = ({ filmId }) => {
   useEffect(() => {
     takeFetchData();
     //eslint-disable-next-line
-  }, [filmId]);
+  }, [movieId]);
 
   useEffect(() => {
     filmData.genres && parseFilmGenres();
@@ -43,7 +45,7 @@ const MovieDetails = ({ filmId }) => {
       };
     });
     try {
-      const data = await getFullMovieInfo(filmId);
+      const data = await getFullMovieInfo(movieId);
       setFilmData({
         genres: data.genres,
         poster_path: data.poster_path,
@@ -116,7 +118,7 @@ const MovieDetails = ({ filmId }) => {
           <div className={style.additionalInfo}>
             <ul className={style.additionalList}>
               <NavLink
-                to={`/movies/${filmId}/cast`}
+                to={`/movies/${movieId}/cast`}
                 className={linkClassName}
                 state={{ from: from }}
               >
@@ -126,7 +128,7 @@ const MovieDetails = ({ filmId }) => {
               </NavLink>
               <h2 className={style.additionalInfoTitle}>Additional Info</h2>
               <NavLink
-                to={`/movies/${filmId}/reviews`}
+                to={`/movies/${movieId}/reviews`}
                 className={linkClassName}
                 state={{ from: from }}
               >
@@ -143,7 +145,3 @@ const MovieDetails = ({ filmId }) => {
 };
 
 export default MovieDetails;
-
-MovieDetails.propTypes = {
-  filmId: PropTypes.number.isRequired,
-};

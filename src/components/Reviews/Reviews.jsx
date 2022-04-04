@@ -1,12 +1,13 @@
 import { useState, useEffect } from 'react';
-
-import PropTypes from 'prop-types';
+import { useParams } from 'react-router-dom';
 
 import { getMovieReview } from '../../shared/services/fetchFilms';
 
 import style from './reviews.module.css';
 
-const Reviews = ({ filmId }) => {
+const Reviews = () => {
+  const { movieId } = useParams();
+
   const [filmData, setFilmData] = useState({
     reviews: [],
     loading: false,
@@ -23,7 +24,7 @@ const Reviews = ({ filmId }) => {
       return { ...prevState, loading: true };
     });
     try {
-      const data = await getMovieReview(filmId);
+      const data = await getMovieReview(movieId);
       setFilmData({ reviews: data.results, loading: false, error: false });
     } catch (err) {
       console.log(err);
@@ -56,7 +57,3 @@ const Reviews = ({ filmId }) => {
 };
 
 export default Reviews;
-
-Reviews.propTypes = {
-  filmId: PropTypes.number.isRequired,
-};

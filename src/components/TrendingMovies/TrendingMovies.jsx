@@ -1,12 +1,10 @@
 import { useEffect, useState } from 'react';
 
-import PropTypes from 'prop-types';
-
 import FilmsList from '../FilmsList/FilmsList';
 
 import { getTrendingFilms } from '../../shared/services/fetchFilms';
 
-const TrendingMovies = ({ filmIdFunc }) => {
+const TrendingMovies = () => {
   const [filmsData, setFilmsData] = useState({
     films: [],
     error: false,
@@ -42,7 +40,7 @@ const TrendingMovies = ({ filmIdFunc }) => {
       {filmsData.loading && <h2>Searching...</h2>}
       {filmsData.error && <h2>Something went wrong...</h2>}
       {Boolean(filmsData.films.length) && (
-        <FilmsList films={filmsData.films} filmIdFunc={filmIdFunc} />
+        <FilmsList films={filmsData.films}/>
       )}
     </>
   );
@@ -50,6 +48,3 @@ const TrendingMovies = ({ filmIdFunc }) => {
 
 export default TrendingMovies;
 
-TrendingMovies.propTypes = {
-  filmIdFunc: PropTypes.func.isRequired,
-};
