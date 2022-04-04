@@ -15,7 +15,6 @@ const MovieDetails = () => {
 
   const { movieId } = useParams();
 
-
   const [parsedGenres, setParsedGenres] = useState('');
   const [filmData, setFilmData] = useState({
     genres: [],

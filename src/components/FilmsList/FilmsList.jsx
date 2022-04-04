@@ -1,3 +1,5 @@
+import { memo } from 'react';
+
 import { Link, useLocation } from 'react-router-dom';
 
 import PropTypes from 'prop-types';
@@ -8,10 +10,7 @@ const FilmsList = ({ films }) => {
   const from = useLocation();
   const partOfCode = films.map(film => {
     return (
-      <li
-        className={style.filmListItem}
-        key={film.id}
-      >
+      <li className={style.filmListItem} key={film.id}>
         <Link to={`/movies/${film.id}`} state={{ from: from }}>
           {film.poster_path ? (
             <img
@@ -42,7 +41,7 @@ const FilmsList = ({ films }) => {
   return <ul className={style.filmsList}>{partOfCode}</ul>;
 };
 
-export default FilmsList;
+export default memo(FilmsList);
 
 FilmsList.propTypes = {
   films: PropTypes.arrayOf(

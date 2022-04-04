@@ -1,4 +1,4 @@
-import { useState, memo, useCallback } from 'react';
+import { useState, useCallback } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
 import { searchFilms } from '../../shared/services/fetchFilms';
@@ -9,22 +9,24 @@ import searchIcon from '../img/searchIcon.svg';
 import FilmsList from '../FilmsList/FilmsList';
 
 const MoviesSearch = () => {
+  const [searchWord, setSearchWord] = useState('');
+  const [searchParams, setSearchParams] = useSearchParams();
   const [filmsData, setFilmsData] = useState({
     films: [],
     err: null,
     loading: false,
     notFoundMessage: ``,
   });
-  const [searchWord, setSearchWord] = useState('');
 
   const handleChange = useCallback(ev => {
     setSearchWord(ev.target.value);
   }, []);
 
-  const handleSubmit = ev => {
+  const handleSubmit = useCallback(ev => {
     ev.preventDefault();
+    setSearchParams({ query: searchWord });
     searchWord.length && takeFetchData();
-  };
+  }, []);
 
   async function takeFetchData() {
     setFilmsData(prevState => {
@@ -82,9 +84,9 @@ const MoviesSearch = () => {
       {filmsData.loading && <h2>Searching...</h2>}
       {filmsData.err && <h2>Something went wrong...</h2>}
       {filmsData.notFoundMessage && <h2>{filmsData.notFoundMessage}</h2>}
-      {Boolean(filmsData.films.length) &&  <FilmsList films={filmsData.films} />}
+      {Boolean(filmsData.films.length) && <FilmsList films={filmsData.films} />}
     </>
   );
 };
 
-export default memo(MoviesSearch);
+export default MoviesSearch;
