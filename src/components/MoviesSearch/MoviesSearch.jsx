@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
 import { searchFilms } from '../../shared/services/fetchFilms';
@@ -18,22 +18,29 @@ const MoviesSearch = () => {
     notFoundMessage: ``,
   });
 
+  const searchParamsWord = searchParams.get('query');
+
+  useEffect(() => {
+    searchParamsWord && takeFetchData();
+    // eslint-disable-next-line
+  }, []);
+
   const handleChange = useCallback(ev => {
     setSearchWord(ev.target.value);
   }, []);
 
-  const handleSubmit = useCallback(ev => {
+  const handleSubmit = ev => {
     ev.preventDefault();
     setSearchParams({ query: searchWord });
     searchWord.length && takeFetchData();
-  }, []);
+  };
 
   async function takeFetchData() {
     setFilmsData(prevState => {
       return { ...prevState, loading: true };
     });
     try {
-      const data = await searchFilms(searchWord);
+      const data = await searchFilms(searchWord || searchParamsWord);
       if (!data.results.length) {
         setFilmsData({
           films: [],
